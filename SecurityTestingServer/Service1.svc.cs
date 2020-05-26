@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
-
+using System.Security.Cryptography;
 namespace SecurityTestingServer
 {
     // 注意: 使用“重构”菜单上的“重命名”命令，可以同时更改代码、svc 和配置文件中的类名“Service1”。
@@ -45,11 +45,24 @@ namespace SecurityTestingServer
             }
             return sb;
         }
+        /// <summary>
+        /// HMAC-SHA1加密算法
+        /// </summary>
+        /// <param name="key">密钥</param>
+        /// <param name="number">要加密的串</param>
+        /// <returns>杂凑值</returns>
         //带密钥的杂凑函数算法实现
-        public string MAC(string key,string number)
+
+        public string MAC(string key, string number)
         {
-            return "编号的杂凑值";
+            byte[] keyBytes = ASCIIEncoding.ASCII.GetBytes(key);
+            byte[] inputBytes = ASCIIEncoding.ASCII.GetBytes(number);
+            HMACSHA1 hmac = new HMACSHA1(keyBytes);
+            byte[] hashBytes = hmac.ComputeHash(inputBytes);
+            return Convert.ToBase64String(hashBytes);
+            //return "编号的杂凑值";
         }
+        //带密钥的杂凑函数算法实现
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)
         {
