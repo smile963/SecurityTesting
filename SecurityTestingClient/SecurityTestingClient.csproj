@@ -141,5 +141,22 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ARt\animal_mantaray_body04.png" />
+    <Resource Include="ARt\animal_mantaray_tail03.png" />
+    <Resource Include="ARt\BackGround.png" />
+    <Resource Include="ARt\DE.png" />
+    <Resource Include="ARt\FlowER_left.png" />
+    <Resource Include="ARt\FlowER_right.png" />
+    <Resource Include="ARt\Gris.png" />
+    <Resource Include="ARt\Hidden_.png" />
+    <Resource Include="ARt\Hidden__.png" />
+    <Resource Include="ARt\Line_One.png" />
+    <Resource Include="ARt\Line_Three.Png" />
+    <Resource Include="ARt\Line_Two.png" />
+    <Resource Include="ARt\Show_Me_The_Truth.png" />
+    <Resource Include="ARt\Sun_The_Quit.png" />
+    <Resource Include="ARt\yellow_butterfly.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -5,12 +5,152 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SecurityTestingClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Label Content="防伪码：" FontSize="20" HorizontalAlignment="Left" Margin="99,231,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.169,-0.007" Width="81"/>
+        Title="MainWindow" Height="640" Width="1280"
+        WindowStyle="None" Background="{x:Null}"  AllowsTransparency="True"
+        MouseLeftButtonDown="DragWindow"
+        >
+    <Window.Resources>
+        <Storyboard x:Key="ClosedStoryboard" Storyboard.TargetName="Main">
+            <DoubleAnimation From="1" To="0" Duration="0:0:2" Storyboard.TargetProperty="OpacityMask.(GradientBrush.GradientStops)[1].Offset"/>
+            <DoubleAnimation From="1" To="0" Duration="0:0:1.5" BeginTime="0:0:0.5" Storyboard.TargetProperty="OpacityMask.(GradientBrush.GradientStops)[2].Offset"/>
+            <ColorAnimation To="#00000000" Duration="0" Storyboard.TargetProperty="OpacityMask.(GradientBrush.GradientStops)[2].Color"/>
+        </Storyboard>
+        <LinearGradientBrush x:Key="ClosedBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Color="#FF000000" Offset="0"/>
+            <GradientStop Color="#FF000000" Offset="1"/>
+            <GradientStop Color="#FF000000" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Resources>
+    
+    <Grid x:Name="Main">
+        
+        <Canvas x:Name="Show_me_The_Truth" HorizontalAlignment="Left" Height="640" VerticalAlignment="Top" Width="1280">
+                <Image   HorizontalAlignment="Left" Height="640" VerticalAlignment="Top" Width="1280" Source="/SecurityTestingClient;component/ARt/Show_Me_The_Truth.png"/>
+
+                <TextBox x:Name="Input" Height="auto" TextWrapping="Wrap" Text="InputFromHere" TextAlignment="Center" VerticalContentAlignment="Center" Width="auto" FontSize="36" RenderTransformOrigin="-12.447,1.045" Foreground="White" Background="Black" FontWeight="Bold" TextDecorations="Underline" FontFamily="汉仪细圆简"   />
+                <Label x:Name="Output"  Height="auto" Width="auto" MaxWidth="1280" Background="Black" FontSize="16" FontWeight="Bold" HorizontalContentAlignment="Left" Foreground="White" Canvas.Top="610">
+                    <TextBlock Height="auto" Width="auto" Background="Black" Foreground="White" TextWrapping="Wrap" Text="" TextDecorations="Underline"/>
+                </Label>
+
+
+            <Image x:Name="The_flag" Height="100" Canvas.Left="770" Canvas.Top="105" Width="100" Source="/SecurityTestingClient;component/ARt/animal_mantaray_body04.png" />
+                <Label x:Name="Tips" Content="不足46字符" Canvas.Left="782" Canvas.Top="116" Height="44" Width="70"/>
+                <Image x:Name="Hidden" Height="270" Canvas.Left="736" Width="160"  Source="/SecurityTestingClient;component/ARt/Hidden__.png" Canvas.Top="0" />
+                <Image x:Name="The_pole" Height="100" Canvas.Left="596" Canvas.Top="223" Width="118" Source="/SecurityTestingClient;component/ARt/animal_mantaray_tail03.png" />
+
+                <Label x:Name="DECIPHER_Two"  Content="  D E C I P H E R"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="56" Width="118" Canvas.Left="594" Canvas.Top="356" FontWeight="Bold" FontFamily="汉仪细圆简" FontSize="10" Background="#00000000" Foreground="White" RenderTransformOrigin="0.5,0.5" />
+                <Button x:Name="Ddn"  BorderBrush="White"  RenderTransformOrigin="-2.771,2.714" Background="#FFDDDDDD" Canvas.Left="560" Canvas.Top="266" Height="112" Width="193" MouseEnter="Ddn_MouseEnter" MouseLeave="Ddn_MouseLeave" Click="Ddn_Click"  >
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Grid>
+                                <Image Margin="2" Source="/SecurityTestingClient;component/ARt/DE.png" RenderTransformOrigin="0.5,0.5" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Label x:Name="QUIT_Two"  Content="           Q U I T"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="56" Width="118" Canvas.Left="800" Canvas.Top="253" FontWeight="Bold" FontFamily="汉仪细圆简" FontSize="10" Background="#00000000" Foreground="White" RenderTransformOrigin="0.5,0.5" />
+                <Button x:Name="QUIT"  BorderBrush="White"  RenderTransformOrigin="-2.771,2.714" Background="#FFDDDDDD" Canvas.Left="773" Canvas.Top="270" Height="112" Width="193" Click="QUIT_Click"   >
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Grid>
+                                <Image Margin="2" Source="/SecurityTestingClient;component/ARt/FlowER_right.png" RenderTransformOrigin="0.5,0.5" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Label x:Name="BACK"  Content="  B A C K"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="56" Width="118" Canvas.Left="413" Canvas.Top="253" FontWeight="Bold" FontFamily="汉仪细圆简" FontSize="10" Background="#00000000" Foreground="White" RenderTransformOrigin="0.5,0.5" />
+                <Button x:Name="BACK_B"  BorderBrush="White"  RenderTransformOrigin="-2.771,2.714" Background="#FFDDDDDD" Canvas.Left="365" Canvas.Top="270" Height="112" Width="193" Click="BACK_B_Click"   >
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Grid>
+                                <Image Margin="2" Source="/SecurityTestingClient;component/ARt/FlowER_left.png" RenderTransformOrigin="0.5,0.5" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+
+
+
+
+            </Canvas>
+
+            <Canvas x:Name="Guide" HorizontalAlignment="Left" Height="640" VerticalAlignment="Top" Width="1280">
+
+                <Image  HorizontalAlignment="Left" Height="640" VerticalAlignment="Top" Width="1280" Source="/SecurityTestingClient;component/ARt/BackGround.png"/>
+                <Label x:Name="QUIT_One" Content="Q U I T" HorizontalAlignment="Left" VerticalAlignment="Top" Height="55" Width="128" Canvas.Left="598" Canvas.Top="71" FontWeight="Bold" FontFamily="汉仪细圆简" FontSize="14" />
+                <Button x:Name="btn" Click="Btn_Click" BorderBrush="White" MouseEnter="Btn_MouseEnter" MouseLeave="Quit_MouseLeave" RenderTransformOrigin="-2.771,2.714" Background="#FFDDDDDD" Canvas.Left="528" Canvas.Top="71" Height="55" Width="135">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Grid>
+                                <Image Margin="2" Source="/SecurityTestingClient;component/ARt/Sun_The_Quit.png" RenderTransformOrigin="0.5,0.5" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Image  Height="273" Canvas.Left="136" Canvas.Top="197" Width="258" Source="/SecurityTestingClient;component/ARt/yellow_butterfly.png"/>
+                <Image  Height="221" Canvas.Left="627" Canvas.Top="177" Width="223" Source="/SecurityTestingClient;component/ARt/Line_One.png"/>
+                <Image  Height="96" Canvas.Left="560" Canvas.Top="76" Width="82" Source="/SecurityTestingClient;component/ARt/Line_Two.png"/>
+                <Image  Height="221" Canvas.Left="560" Canvas.Top="41" Width="211" Source="/SecurityTestingClient;component/ARt/Line_Three.png"/>
+                <Image  Height="221" Canvas.Left="723" Canvas.Top="333" Width="93" Source="/SecurityTestingClient;component/ARt/Line_Two.png" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image x:Name="Gang" Height="73" Canvas.Left="637" Canvas.Top="62" Width="46" Source="/SecurityTestingClient;component/ARt/Line_Two.png" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+
+                <Label x:Name="DECIPHER"  Content="D E C I P H E R" HorizontalAlignment="Left" VerticalAlignment="Top" Height="56" Width="135" Canvas.Left="670" Canvas.Top="440" FontWeight="Bold" FontFamily="汉仪细圆简" FontSize="10" />
+                <Button x:Name="ttn"  BorderBrush="White"  RenderTransformOrigin="-2.771,2.714" Background="#FFDDDDDD" Canvas.Left="621" Canvas.Top="436" Height="134" Width="200" MouseEnter="Ttn_MouseEnter" MouseLeave="Ttn_MouseLeave" Click="Ttn_Click" >
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Grid>
+                                <Image Margin="2" Source="/SecurityTestingClient;component/ARt/Gris.png" RenderTransformOrigin="0.5,0.5" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+            </Canvas>
+
+            <Grid.OpacityMask>
+                <LinearGradientBrush StartPoint="0.5,1" EndPoint="0.5,0">
+                    <GradientStop Color="#00000000" Offset="0"/>
+                    <GradientStop Color="#00000000" Offset="1"/>
+                    <GradientStop Color="#00000000" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.OpacityMask>
+            <Grid.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation From="1" To="0" Duration="0:0:1.5" Storyboard.TargetProperty="OpacityMask.(GradientBrush.GradientStops)[1].Offset"/>
+                                <DoubleAnimation From="1" To="0" Duration="0:0:1" BeginTime="0:0:0.5" Storyboard.TargetProperty="OpacityMask.(GradientBrush.GradientStops)[2].Offset"/>
+                                <ColorAnimation To="#FF000000" Duration="0" Storyboard.TargetProperty="OpacityMask.(GradientBrush.GradientStops)[2].Color"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Grid.Triggers>
+            <!--<Label Content="防伪码：" FontSize="20" HorizontalAlignment="Left" Margin="99,231,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.169,-0.007" Width="81"/>
         <TextBox Name="SecurityCode" FontSize="20" HorizontalAlignment="Left" Height="35" Margin="206,231,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="361"/>
         <Button Content="检测" FontSize="20" HorizontalAlignment="Left" Margin="325,317,0,0" VerticalAlignment="Top" Width="75" Height="37" Click="Button_Click"/>
-        <TextBlock Name="Result" FontSize="18" HorizontalAlignment="Left" Margin="180,73,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="99" Width="387"/>
+        <TextBlock Name="Result" FontSize="18" HorizontalAlignment="Left" Margin="180,73,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="99" Width="387"/>-->
 
 
     </Grid>
