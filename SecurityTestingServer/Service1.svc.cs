@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -22,33 +23,65 @@ namespace SecurityTestingServer
             string number = SecurityCode.Substring(0,6);
             //计算编号的杂凑值
             string MACNumber = MAC(key,number);
-            //数据库搜索产品检测表判断是否存在于数据库中
-            if (true)
+            
+            string MACDb="",time;
+            bool isExit = false;
+
+            using(var context = new Model())
             {
-                //搜索时间记录表判断是否有查询记录
-                if (true)
+
+                var q = from t in context.CheckProduct
+                        where t.Id == number
+                        select t;
+                foreach (var m in q)
                 {
-                    sb.AppendLine("您所查询的产品为正品但已被检测，检测时间如下：");
-                    //然后将每一次时间记录表里的时间进行输入到sb中。
+                    MACDb = m.MAC;
+                }
+                //数据库搜索产品检测表判断是否存在于数据库中
+                if (MACDb == MACNumber)
+                {
+                    var p = from k in context.CheckTime
+                            where k.Id == number
+                            select k;
+                    if (p.Count() > 0)
+                        isExit = true;
+                    //搜索时间记录表判断是否有查询记录
+                    if (isExit)
+                    {
+                        sb.AppendLine("您所查询的产品为正品但已被检测，检测时间如下：");
+                        //然后将每一次时间记录表里的时间进行输入到sb中。
+                        foreach (var m in p)
+                        {
+                            sb.AppendLine(m.time);
+                        }
+                        time = DateTime.Now.ToString();
+                        sb.AppendLine(time);
+                    }
+                    else
+                    {
+                        time = DateTime.Now.ToString();
+                        //将本次产品记录到数据库中
+                        sb.AppendLine("您好，您所查询的***产品是正品，请放心购买，谢谢您的惠顾！");
+                    }
+
                     //将本次查询时间记录到数据库中
-                    string time = DateTime.Now.ToString();
+                    CheckTime ck = new CheckTime();
+                    ck.Id = number;
+                    ck.time = time;
+                    context.CheckTime.Add(ck);
+                    context.SaveChanges();
                 }
                 else
                 {
-                    //将本次产品记录到数据库中
-                    sb.AppendLine("您好，您所查询的***产品是正品，请放心购买，谢谢您的惠顾！");
+                    sb.AppendLine("对不起，你搜索的产品不存在。");
                 }
-            }
-            else
-            {
-                sb.AppendLine("对不起，你搜索的产品不存在。");
             }
             return sb;
         }
         //带密钥的杂凑函数算法实现
         public string MAC(string key,string number)
         {
-            return "编号的杂凑值";
+            return "1232132132132";
         }
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)
